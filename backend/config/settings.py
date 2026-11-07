@@ -146,3 +146,13 @@ if not DEBUG:
 
 # Private admin address (must end with a slash). Locally it stays "admin/".
 ADMIN_URL = os.getenv("ADMIN_URL", "admin/")
+
+# Print server errors (with details) in the Render Logs
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {"console": {"class": "logging.StreamHandler"}},
+    "loggers": {
+        "django.request": {"handlers": ["console"], "level": "ERROR", "propagate": False},
+    },
+}
