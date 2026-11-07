@@ -11,13 +11,20 @@ IMAGE_EXT = {"jpg", "jpeg", "png", "gif", "webp", "avif"}
 
 
 def _configure():
+    name = os.getenv("CLOUDINARY_CLOUD_NAME", "").strip()
+    key = os.getenv("CLOUDINARY_API_KEY", "").strip()
+    secret = os.getenv("CLOUDINARY_API_SECRET", "").strip()
+    if name and key and secret:
+        cloudinary.config(cloud_name=name, api_key=key, api_secret=secret, secure=True)
+        return
+
     raw = os.getenv("CLOUDINARY_URL", "").strip().strip('"').strip("'").strip()
     if raw.upper().startswith("CLOUDINARY_URL="):
         raw = raw.split("=", 1)[1].strip().strip('"').strip("'")
     u = urlparse(raw)
     if u.scheme != "cloudinary" or not u.username or not u.password or "@" not in u.netloc:
         raise ValueError(
-            "CLOUDINARY_URL is not valid. It must look like cloudinary://API_KEY:API_SECRET@CLOUD_NAME"
+            "Cloudinary is not configured. Set CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY and CLOUDINARY_API_SECRET."
         )
     cloudinary.config(
         cloud_name=u.netloc.rsplit("@", 1)[-1],
@@ -33,7 +40,7 @@ def _ext(name):
 
 @deconstructible
 class CloudinaryStorage(Storage):
-    """Stores uploaded files on Cloudinary. Needs the CLOUDINARY_URL env variable."""
+    """Stores uploaded files on Cloudinary."""
 
     def _save(self, name, content):
         _configure()

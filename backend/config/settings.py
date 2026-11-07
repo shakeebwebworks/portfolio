@@ -156,3 +156,7 @@ LOGGING = {
         "django.request": {"handlers": ["console"], "level": "ERROR", "propagate": False},
     },
 }
+
+# Use Cloudinary when the three separate variables are set
+if os.getenv("CLOUDINARY_CLOUD_NAME") and os.getenv("CLOUDINARY_API_KEY") and os.getenv("CLOUDINARY_API_SECRET"):
+    STORAGES["default"] = {"BACKEND": "config.storage.CloudinaryStorage"}
