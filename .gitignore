@@ -1,0 +1,12 @@
+.env
+*.env
+!.env.example
+venv/
+__pycache__/
+*.pyc
+backend/staticfiles/
+backend/media/
+node_modules/
+frontend/dist/
+.vscode/
+Thumbs.db
