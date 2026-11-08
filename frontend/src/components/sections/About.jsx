@@ -30,6 +30,13 @@ export default function About() {
 
         <div className="row g-5 align-items-start">
           <div className="col-lg-6">
+            {site.photo && (
+              <Reveal>
+                <div className="about-photo">
+                  <img src={site.photo} alt={`${site.name} profile photo`} loading="lazy" />
+                </div>
+              </Reveal>
+            )}
             {paragraphs.map((p, i) => (
               <Reveal key={i} delay={i * 0.08}>
                 <p className="about-text">{p}</p>

@@ -22,7 +22,9 @@ export default async function loadProfile() {
     if (p.availability_text) site.availabilityText = p.availability_text;
     site.available = !!p.available;
     if (p.about_text) site.about = p.about_text;
+    if (p.photo) site.photo = p.photo;
   } catch {
     // Backend off or no profile yet: keep the defaults from siteConfig.js
   }
 }
+

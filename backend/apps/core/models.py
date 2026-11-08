@@ -12,6 +12,7 @@ class SiteProfile(models.Model):
     linkedin_url = models.URLField(blank=True)
     other_social_url = models.URLField(blank=True)
     cv_file = models.FileField(upload_to="cv/", blank=True)
+    photo = models.ImageField(upload_to="profile/", blank=True, null=True, help_text="Your profile photo, shown in the About section")
     available = models.BooleanField(default=True)
     availability_text = models.CharField(max_length=120, default="Available for new projects")
     about_text = models.TextField(blank=True)
@@ -94,3 +95,4 @@ class Experience(models.Model):
 
     def __str__(self):
         return self.title
+
