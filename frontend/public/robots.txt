@@ -1,5 +1,4 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
 
-# Change this to your real backend address when you deploy
-Sitemap: http://localhost:8000/sitemap.xml
+Sitemap: https://portfolio-muwl.onrender.com/sitemap.xml
